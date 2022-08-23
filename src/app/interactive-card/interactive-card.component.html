@@ -1,0 +1,202 @@
+<body>
+  <section class="interactiveCard">
+    <div class="interactiveCard__left">
+      <div class="card__front">
+        <div class="card__front__content">
+          <div class="cardBrand"></div>
+          <h3 id="cardNum">{{ iCardNumber }}</h3>
+          <div class="cardFooter">
+            <div id="cardName">{{ iCardName }}</div>
+            <div>
+              <span id="cardMonth">{{ iCardMonth }}</span
+              >/<span id="cardYear">{{ iCardYear }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card__back">
+        <div class="cvv">000</div>
+      </div>
+    </div>
+    <div class="interactiveCard__right">
+      <form
+        id="cardForm"
+        [formGroup]="cardDetailsForm"
+        (ngSubmit)="submitForm()"
+      >
+        <div class="cardForm">
+          <div class="form-group">
+            <label for="name">CARDHOLDER NAME</label>
+            <input
+              type="text"
+              id="name"
+              class="card-inputs"
+              maxlength="27"
+              placeholder="e.g. Jane Appleseed"
+              formControlName="cardHolderName"
+            />
+            <span
+              *ngIf="
+                !cardDetailsForm.get('cardHolderName').valid &&
+                cardDetailsForm.get('cardHolderName').touched
+              "
+              class="contact--form--error"
+              >{{ fieldBlankError }}</span
+            >
+          </div>
+          <div formGroupName="userData">
+            <div class="form-group">
+              <label for="number">CARDHOLDER NUMBER</label>
+              <input
+                type="text"
+                id="number"
+                class="card-inputs"
+                size="19"
+                maxlength="19"
+                minlength="19"
+                placeholder="e.g. 1234 5678 0000 9999"
+                formControlName="cardNumber"
+              />
+              <span
+                *ngIf="
+                  !cardDetailsForm.get('userData.cardNumber').valid &&
+                  cardDetailsForm.get('userData.cardNumber').touched
+                "
+                class="contact--form--error"
+              >
+                <span
+                  *ngIf="
+                    cardDetailsForm.get('userData.cardNumber').errors[
+                      'notNumber'
+                    ]
+                  "
+                  >{{ fieldWrongFormError }}</span
+                >
+                <span
+                  *ngIf="
+                    cardDetailsForm.get('userData.cardNumber').errors[
+                      'minlength'
+                    ]
+                  "
+                  >Minimum 16 numbers!</span
+                >
+                <span
+                  *ngIf="
+                    cardDetailsForm.get('userData.cardNumber').errors[
+                      'required'
+                    ]
+                  "
+                  >{{ fieldBlankError }}</span
+                >
+              </span>
+            </div>
+          </div>
+          <!-- <p id="cardForm__wrongFormat">Wront Format! Only number.</p> -->
+          <div class="cardExtraInfo">
+            <div class="cardExpiry">
+              <div class="form-group monthDiv">
+                <label for="month">Exp. Date (MM/YY)</label
+                ><input
+                  type="text"
+                  id="month"
+                  maxlength="2"
+                  placeholder="MM"
+                  formControlName="expiryMonth"
+                />
+                <span
+                  *ngIf="
+                    !cardDetailsForm.get('expiryMonth').valid &&
+                    cardDetailsForm.get('expiryMonth').touched
+                  "
+                  class="contact--form--error"
+                >
+                  <span
+                    *ngIf="cardDetailsForm.get('expiryMonth').errors['pattern']"
+                    >{{ fieldWrongFormError }}</span
+                  >
+                  <span
+                    *ngIf="
+                      cardDetailsForm.get('expiryMonth').errors['min'] ||
+                      cardDetailsForm.get('expiryMonth').errors['max']
+                    "
+                    >Wrong month!</span
+                  >
+                  <span
+                    *ngIf="
+                      cardDetailsForm.get('expiryMonth').errors['required']
+                    "
+                    >{{ fieldBlankError }}</span
+                  >
+                </span>
+              </div>
+              <div class="form-group monthDiv">
+                <label for="year"></label
+                ><input
+                  class="yyInput"
+                  type="text"
+                  id="year"
+                  maxlength="2"
+                  placeholder="YY"
+                  formControlName="expiryYear"
+                />
+                <span
+                  *ngIf="
+                    !cardDetailsForm.get('expiryYear').valid &&
+                    cardDetailsForm.get('expiryYear').touched
+                  "
+                  class="contact--form--error"
+                >
+                  <span
+                    *ngIf="cardDetailsForm.get('expiryYear').errors['pattern']"
+                    >{{ fieldWrongFormError }}</span
+                  >
+                  <span
+                    *ngIf="
+                      cardDetailsForm.get('expiryYear').errors['min'] ||
+                      cardDetailsForm.get('expiryYear').errors['max']
+                    "
+                    >Wrong year!</span
+                  >
+                  <span
+                    *ngIf="cardDetailsForm.get('expiryYear').errors['required']"
+                    >{{ fieldBlankError }}</span
+                  >
+                </span>
+              </div>
+            </div>
+            <div class="cardCVC">
+              <div class="form-group">
+                <label for="cvc">CVC</label>
+                <input
+                  type="text"
+                  id="cvc"
+                  maxlength="3"
+                  placeholder="e.g. 123"
+                  formControlName="cvcNumber"
+                />
+                <span
+                  *ngIf="
+                    !cardDetailsForm.get('cvcNumber').valid &&
+                    cardDetailsForm.get('cvcNumber').touched
+                  "
+                  class="contact--form--error"
+                >
+                  <span
+                    *ngIf="cardDetailsForm.get('cvcNumber').errors['pattern']"
+                    >{{ fieldWrongFormError }}</span
+                  >
+                  <span
+                    *ngIf="cardDetailsForm.get('cvcNumber').errors['required']"
+                    >{{ fieldBlankError }}</span
+                  >
+                </span>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="button" value="Confirm" form="cardForm" />
+          <!-- <a href="#" class="button">Confirm</a> -->
+        </div>
+      </form>
+    </div>
+  </section>
+</body>

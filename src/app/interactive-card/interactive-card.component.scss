@@ -1,0 +1,218 @@
+@import "../../scss/styles.scss";
+.interactiveCard {
+  display: flex;
+  @include breakpoint-down(medium) {
+    flex-direction: column;
+  }
+
+  &__left {
+    position: relative;
+    width: 29.6875rem;
+    height: 100vh;
+    background: linear-gradient(
+      to left top,
+      hsl(249, 99%, 64%),
+      hsl(278, 94%, 30%)
+    );
+    //mobile & tablets
+    @include breakpoint-down(medium) {
+      width: 100%;
+      height: 15.0625rem;
+      background: $veryDarkViolet;
+    }
+    .card__front {
+      position: absolute;
+      top: 15%;
+      left: 163px;
+      background-image: url(../../assets/images/bg-card-front.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 23.9375rem;
+      max-height: 15.375rem;
+      padding: 1.75rem 1.875rem;
+      border-radius: 0.5rem;
+      @include breakpoint-down(medium) {
+        top: 127px;
+        left: 30%;
+        width: 18rem;
+        height: 10rem;
+        z-index: 1000;
+        padding: 1rem;
+      }
+      @include breakpoint-down(small) {
+        top: 127px;
+        left: 20px;
+        width: 18rem;
+        height: 10rem;
+        z-index: 1000;
+        padding: 1rem;
+      }
+      &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        @include breakpoint-down(medium) {
+          gap: 5px;
+        }
+        .cardBrand {
+          background-image: url(../../assets/images/card-logo.svg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+          width: 5.7rem;
+          min-height: 3.1875rem;
+          margin-bottom: 20px;
+          @include breakpoint-down(medium) {
+            width: 3.5rem;
+            min-height: 2rem;
+            margin-bottom: 10px;
+          }
+        }
+        h3 {
+          font-size: 1.8rem;
+          font-weight: 400;
+          color: $white;
+          text-align: center;
+          letter-spacing: 0.2rem;
+          @include breakpoint-down(medium) {
+            font-size: 1rem;
+            font-weight: 500;
+          }
+        }
+        .cardFooter {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: $font-sm;
+          color: $white;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
+          margin-top: -20px;
+          @include breakpoint-down(medium) {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+
+    .card__back {
+      position: absolute;
+      top: 54%;
+      left: 258px;
+      background-image: url(../../assets/images/bg-card-back.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 25.9375rem;
+      height: 15.375rem;
+      border-radius: 0.5rem;
+      @include breakpoint-down(medium) {
+        top: 20px;
+        left: 40%;
+        width: 18rem;
+        height: 10rem;
+        z-index: 999;
+      }
+      @include breakpoint-down(small) {
+        top: 30px;
+        left: 71px;
+        width: 18rem;
+        height: 10rem;
+        z-index: 999;
+      }
+      .cvv {
+        position: absolute;
+        top: 46%;
+        right: 60px;
+        font-size: $font-sm;
+        color: $white;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+
+  &__right {
+    flex: 1;
+    .cardForm {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6875rem;
+      width: 24.025rem;
+      //   height: 22.375rem;
+      //   text-align: center;
+      margin: auto;
+      padding: 30vh 0;
+      @include breakpoint-down(medium) {
+        padding: 10vh 5vw;
+      }
+      @include breakpoint-down(small) {
+        width: 20.4375rem;
+        padding: 10vh 5vw;
+      }
+      .contact--form--error {
+        color: red;
+        font-size: $font-sm;
+        padding: 0;
+        margin-top: -10px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      label {
+        font-size: $font-sm;
+        color: black;
+        letter-spacing: 0.1rem;
+      }
+      input {
+        padding: 1rem;
+        border: 1px solid $lightGrayishViolet;
+        border-radius: 5px;
+        // box-shadow: 0px 3px 12px rgba($color: #000000, $alpha: 0.15);
+        color: $veryDarkViolet;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05rem;
+      }
+      input.button {
+        color: $white;
+      }
+      input.ng-invalid.ng-touched {
+        border: 1px solid red;
+      }
+    }
+    .cardExtraInfo {
+      display: flex;
+      margin-top: 15px;
+      gap: 1.3125rem;
+    }
+    .cardExpiry {
+      display: flex;
+      max-width: 10.5625rem;
+      gap: 12px;
+      @include breakpoint-down(small) {
+        max-width: 9.5rem;
+      }
+      .monthDiv {
+        width: 4.875rem;
+        label {
+          width: 10.5625rem;
+        }
+        @include breakpoint-down(small) {
+          max-width: 4.5625rem;
+        }
+      }
+      .yyInput {
+        margin-top: 15px;
+      }
+    }
+    .cardCVC {
+      max-width: 12.3rem;
+      @include breakpoint-down(small) {
+        max-width: 7.2rem;
+      }
+    }
+  }
+}
